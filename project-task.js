@@ -7,6 +7,12 @@
 This activity will help students:
 
 - Identify and explain JavaScript's standard exceptions through practical examples
+
+Answer: i learned to use JavaScript's standars exceptions to handle errors, like reference erroe
+for missing values, type errors for wrong typing and error fro custom chacks like empty file data.
+By using clear exception helps users and developers know ehat went wrong.
+
+
 - Implement `finally` blocks to manage resources and ensure consistent cleanup
 
 ---
@@ -43,20 +49,49 @@ Step 4: Test Your Solution
 // ============================================
 
 function processFile(fileName, fileData) {
+  // Simulate the opening a file or resource
+  let fileHandle = null;
+
+
   try {
-    // TODO: Add input validation here
-    
+    // 1 TODO: Add input validation and standard exception
+    if (!fileName){
+      throw new ReferenceError("File nane not found.");
+    }
+    if (typeof fileData !== "string"){
+      throw new TypeError("File data needs to be a string type.");
+    }
+    if (fileData === ""){
+      throw new TypeError("File daya should not be empty.");
+    }
+
     // TODO: Implement simulated file processing here
-    console.log(`Processing file: ${fileName}`);
+    fileHandle = {name: fileName};
+    console.log(`Processing file: ${fileHandle.name}`);
     console.log(`File content: ${fileData}`);
-    
+
     // TODO: Add simulated file operations (reading/writing)
-    
-  } catch (err) {
-    // TODO: Implement error handling
-    console.error(err);
+    console.log("Simulated file operations reading/writing has been completed.");
+ 
   }
-  // TODO: Implement a finally block to close resources
+
+  catch (err){
+    // Implement error handling
+    console.error("Error:", err.message);
+  }
+
+  // Implement a finally block to close resources
+
+  finally{
+    if (fileHandle){
+      console.log(`Closing file: ${fileHandle.name}`);
+      fileHandle = null;
+    }
+    else {
+      console.log("There is no file to close")
+    }
+    console.log("Finally blobk has been execute.");
+  }
 }
 
 // ============================================
